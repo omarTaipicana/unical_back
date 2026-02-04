@@ -6,7 +6,7 @@ const app = require("./app"); // tu Express app
 const sequelize = require("./utils/connection");
 const sequelizeM = require("./utils/connectionM");
 
-const PORT = process.env.PORT || 8081;
+const PORT = process.env.PORT || 8082;
 
 const main = async () => {
   try {
