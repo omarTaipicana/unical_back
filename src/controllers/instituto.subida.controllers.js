@@ -186,23 +186,50 @@ const subirCertificadosFirmados = catchError(async (req, res) => {
     }
 
 
-    await sendEmail({
-      to: user.email,
-      subject: "🎓 Tu certificado está listo - EDUKA",
-      html: `
+await sendEmail({
+  to: user.email,
+  subject: "🎓 Tu certificado está listo - UNICAL",
+  html: `
   <div style="font-family: Arial, sans-serif; background-color: #f4f6f8; padding: 20px; color: #333;">
+    
     <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); overflow: hidden;">
       
       <!-- Header -->
-      <div style="text-align: center; background-color: #1B326B; padding: 25px;">
-        <img src="https://res.cloudinary.com/desgmhmg4/image/upload/v1765358711/eduka_2026_kh3h9e.png" alt="EDUKA" style="width: 160px;" />
+     <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 18px rgba(0,0,0,0.08); overflow: hidden;">
+      
+      <!-- Header -->
+      <div style="
+        text-align: center;
+        background: radial-gradient(circle at center, #ffffff 0%, #e8ecff 30%, #2f3f8f 70%, #1B2A5B 100%);
+        padding: 50px 20px;
+      ">
+        
+        <img src="https://res.cloudinary.com/desgmhmg4/image/upload/v1775011838/unical-sf_ngqle3.png"
+             alt="UNICAL"
+             style="
+               width: 240px;
+               max-width: 100%;
+               display: block;
+               margin: 0 auto;
+               filter: drop-shadow(0px 6px 12px rgba(0,0,0,0.25));
+             " />
+
       </div>
       
       <!-- Body -->
       <div style="padding: 35px; text-align: center;">
-        <h1 style="color: #1B326B; margin-bottom: 10px;">¡Felicitaciones ${user.firstName} ${user.lastName}!</h1>
-        <h2 style="font-weight: normal; margin-bottom: 25px;">Tu certificado del curso:</h2>
-        <h2 style="color: #1B326B; margin-bottom: 25px;">"${curso.nombre.toUpperCase()}"</h2>
+        
+        <h1 style="color: #1B2A5B; margin-bottom: 10px;">
+          ¡Felicitaciones ${user.firstName} ${user.lastName}!
+        </h1>
+
+        <h2 style="font-weight: normal; margin-bottom: 25px;">
+          Tu certificado del curso:
+        </h2>
+
+        <h2 style="color: #A4C639; margin-bottom: 25px;">
+          "${curso.nombre.toUpperCase()}"
+        </h2>
         
         <p style="font-size: 16px; line-height: 1.6; margin-bottom: 25px;">
           Nos complace informarte que tu certificado ha sido emitido exitosamente y ya se encuentra disponible para su descarga.
@@ -212,13 +239,13 @@ const subirCertificadosFirmados = catchError(async (req, res) => {
         <p style="text-align: center; margin-bottom: 35px;">
           <a href="${absoluteUrl}" target="_blank"
             style="
-              background-color: #4D4D4D;
-              color: #ffffff;
+              background-color: #A4C639;
+              color: #1B2A5B;
               padding: 14px 30px;
               text-decoration: none;
               border-radius: 6px;
               font-size: 16px;
-              font-weight: 600;
+              font-weight: 700;
               display: inline-block;
               box-shadow: 0 4px 8px rgba(0,0,0,0.15);
             ">
@@ -246,18 +273,22 @@ const subirCertificadosFirmados = catchError(async (req, res) => {
             Contactar por WhatsApp
           </a>
         </p>
+
       </div>
       
       <!-- Footer -->
       <div style="background-color: #f0f0f0; padding: 25px; text-align: center; font-size: 13px; color: #666;">
         <p>Este es un correo automático, por favor no respondas a este mensaje.</p>
-        <p style="margin-top: 20px;">© ${new Date().getFullYear()} EDUKA. Todos los derechos reservados.</p>
+        <p style="margin-top: 20px;">
+          © ${new Date().getFullYear()} UNICAL - Universidad Integral del Caribe y América Latina
+        </p>
       </div>
       
     </div>
+    
   </div>
   `
-    });
+});
 
 
 
@@ -405,12 +436,12 @@ try {
       <div style="font-family: Arial, sans-serif; background-color: #f4f6f8; padding: 20px; color: #333;">
         <div style="max-width: 800px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); overflow: hidden;">
           
-          <div style="text-align: center; background-color: #1B326B; padding: 20px;">
-            <img src="https://res.cloudinary.com/desgmhmg4/image/upload/v1765358711/eduka_2026_kh3h9e.png" alt="EDUKA" style="width: 160px;" />
+          <div style="text-align: center; background-color: #a1f48f; padding: 20px;">
+            <img src="https://res.cloudinary.com/desgmhmg4/image/upload/v1775011838/unical-sf_ngqle3.png" alt="EDUKA" style="width: 160px;" />
           </div>
 
           <div style="padding: 25px;">
-            <h2 style="color:#1B326B; margin-bottom:10px;">Resumen de procesamiento de certificados firmados</h2>
+            <h2 style="color:#a1f48f; margin-bottom:10px;">Resumen de procesamiento de certificados firmados</h2>
             <p style="font-size:15px; margin-bottom:15px;">
               Curso: <strong>${curso.nombre.toUpperCase()}</strong>
             </p>

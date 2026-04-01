@@ -355,7 +355,7 @@ const create = catchError(async (req, res) => {
       console.error("❌ No se pudo registrar usuario en Moodle. Inscripción local NO creada.");
 
       return res.status(502).json({
-        message: "No se pudo registrar el usuario en la plataforma académica. Por favor verifica si tu usuario Acadex registra correctamente tu cedula de identidad, contacta a soporte para modificaciones."
+        message: "No se pudo registrar el usuario en la plataforma académica. Por favor verifica si tu usuario Unical registra correctamente tu cedula de identidad, contacta a soporte para modificaciones."
       });
     }
     else {
@@ -388,60 +388,94 @@ const create = catchError(async (req, res) => {
   const courseIdMoodle = getMoodleCourseId(course.sigla);
   const cursoUrl = `${process.env.MOODLE_URL}/course/view.php?name=${course.sigla}`;
   // Enviar email
-  await sendEmail({
-    to: email,
-    subject: "Inscripción confirmada - EDUKA",
-    html: `
+await sendEmail({
+  to: email,
+  subject: "Inscripción confirmada - UNICAL",
+  html: `
   <div style="font-family: Arial, sans-serif; background-color: #f4f6f8; padding: 20px; color: #333;">
-    <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); overflow: hidden;">
+    
+    <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 18px rgba(0,0,0,0.08); overflow: hidden;">
       
       <!-- Header -->
-      <div style="text-align: center; background-color: #1B326B; padding: 25px;">
-        <img src="https://res.cloudinary.com/desgmhmg4/image/upload/v1765358711/eduka_2026_kh3h9e.png" alt="EDUKA" style="width: 160px;" />
+      <div style="
+        text-align: center;
+        background: radial-gradient(circle at center, #ffffff 0%, #e8ecff 30%, #2f3f8f 70%, #1B2A5B 100%);
+        padding: 50px 20px;
+      ">
+        
+        <img src="https://res.cloudinary.com/desgmhmg4/image/upload/v1775011838/unical-sf_ngqle3.png"
+             alt="UNICAL"
+             style="
+               width: 240px;
+               max-width: 100%;
+               display: block;
+               margin: 0 auto;
+               filter: drop-shadow(0px 6px 12px rgba(0,0,0,0.25));
+             " />
+
       </div>
       
       <!-- Body -->
       <div style="padding: 35px; text-align: center;">
-        <h1 style="color: #1B326B; margin-bottom: 10px;">¡Hola ${nombres} ${apellidos}!</h1>
-        <h2 style="font-weight: normal; margin-bottom: 15px;">¡Felicitaciones por tu inscripción!</h2>
-        <h2 style="color: #1B326B; margin-bottom: 25px;">"${course.nombre}"</h2>
+        
+        <h1 style="color: #1B2A5B; margin-bottom: 10px;">
+          ¡Hola ${nombres} ${apellidos}!
+        </h1>
+
+        <h2 style="font-weight: normal; margin-bottom: 15px; color:#444;">
+          🎉 ¡Inscripción confirmada con éxito!
+        </h2>
+
+        <!-- Línea decorativa -->
+        <div style="
+          width: 60px;
+          height: 4px;
+          background: #A4C639;
+          margin: 15px auto 25px;
+          border-radius: 2px;
+        "></div>
+
+        <h2 style="color: #A4C639; margin-bottom: 25px;">
+          "${course.nombre}"
+        </h2>
         
         <p style="font-size: 16px; line-height: 1.6; margin-bottom: 25px;">
-          Nos alegra que hayas elegido este curso para ampliar tus conocimientos. A continuación encontrarás tus credenciales de acceso a la plataforma:
+          Te damos la bienvenida a <strong>UNICAL - Universidad Integral del Caribe y América Latina</strong>. 
+          Nos alegra que formes parte de nuestra comunidad académica.
         </p>
 
         <p style="font-size: 16px; line-height: 1.7; margin-bottom: 30px;">
           ${usuarioMoodleNuevo
         ? `🔑 <strong>Usuario:</strong> ${cedula} <br>
-               🔒 <strong>Contraseña:</strong> Eduka.${cedula}*`
+               🔒 <strong>Contraseña:</strong> Unical.${cedula}*`
         : `Ya tienes un usuario registrado en nuestra plataforma. Usa tus credenciales habituales para ingresar.`}
         </p>
 
+        <!-- Botón -->
         <p style="text-align: center; margin-bottom: 35px;">
           <a href="${cursoUrl}" target="_blank"
             style="
-              background-color: #1B326B;
-              color: #ffffff;
-              padding: 14px 30px;
+              background: linear-gradient(135deg, #A4C639, #8fb82f);
+              color: #1B2A5B;
+              padding: 14px 32px;
               text-decoration: none;
-              border-radius: 6px;
+              border-radius: 8px;
               font-size: 16px;
-              font-weight: 600;
+              font-weight: 700;
               display: inline-block;
-              box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-              transition: background-color 0.3s ease;
+              box-shadow: 0 6px 14px rgba(0,0,0,0.15);
             ">
-            🎓 Ir al curso
+            🎓 Acceder al curso
           </a>
         </p>
 
-        <!-- Atención personalizada WhatsApp -->
+        <!-- Atención -->
         <div style="margin-top: 40px; text-align: center;">
-          <p style="font-size: 20px; font-weight: 700; color: #2c3e50; margin-bottom: 10px;">
+          <p style="font-size: 20px; font-weight: 700; color: #1B2A5B; margin-bottom: 10px;">
             📞 Atención Personalizada
           </p>
           <p style="font-size: 16px; line-height: 1.6; margin-bottom: 20px;">
-            Si tienes preguntas o necesitas ayuda, estamos disponibles para brindarte soporte inmediato.
+            Si necesitas ayuda o tienes alguna consulta, nuestro equipo está disponible para asistirte.
           </p>
           <a href="https://wa.me/593980773229" target="_blank"
             style="
@@ -463,28 +497,17 @@ const create = catchError(async (req, res) => {
       <!-- Footer -->
       <div style="background-color: #f0f0f0; padding: 25px; text-align: center; font-size: 13px; color: #666;">
         <p>Este es un correo automático, por favor no respondas a este mensaje.</p>
-        <p>Si necesitas soporte adicional, visita nuestra sección de contacto:</p>
-        <p style="margin-top: 10px;">
-          <a href="https://eduka-educ.com" target="_blank"
-            style="
-              background-color: #1B326B;
-              color: #ffffff;
-              padding: 10px 24px;
-              text-decoration: none;
-              border-radius: 5px;
-              font-weight: 600;
-              display: inline-block;
-            ">
-            Contactar soporte
-          </a>
+       
+        <p style="margin-top: 20px;">
+          © ${new Date().getFullYear()} UNICAL - Universidad Integral del Caribe y América Latina
         </p>
-        <p style="margin-top: 20px;">© ${new Date().getFullYear()} EDUKA. Todos los derechos reservados.</p>
       </div>
       
     </div>
+    
   </div>
   `,
-  });
+});
 
 
 

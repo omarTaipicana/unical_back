@@ -350,45 +350,105 @@ const create = catchError(async (req, res) => {
 
     await EmailCode.create({ code, userId: user.id });
 
-    await sendEmail({
-      to: email,
-      subject: "Verificación de correo electrónico - EDUKA",
-      html: `
-      <div style="font-family: Arial, sans-serif; background-color: #f0f8ff; padding: 20px; color: #333;">
-        <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); overflow: hidden;">
-          
-          <!-- Encabezado con logo -->
-          <div style="text-align: center; background-color: #007BFF; padding: 20px;">
-            <img src="https://res.cloudinary.com/desgmhmg4/image/upload/v1747890355/eduka_sf_gaus5o.png" alt="EDUKA" style="width: 150px;" />
-          </div>
-
-          <!-- Cuerpo del mensaje -->
-          <div style="padding: 30px; text-align: center;">
-            <h1 style="color: #007BFF;">Hola ${firstName} ${lastName},</h1>
-          <h2 style="font-weight: normal;">Gracias por registrarte en <strong>EDUKA</strong></h2>
-            <p style="font-size: 16px; line-height: 1.6;">
-              Para completar la verificación de tu cuenta, por favor haz clic en el siguiente botón:
-            </p>
-
-            <!-- Botón de verificación -->
-            <a href="${link}" style="display: inline-block; padding: 12px 24px; background-color: #00aaff; color: white; font-size: 16px; font-weight: bold; border-radius: 8px; text-decoration: none; margin-top: 20px;">
-              Verificar cuenta
-            </a>
-
-            <p style="margin-top: 30px; font-size: 14px; color: #666;">
-              Si tú no solicitaste este cambio, puedes ignorar este mensaje.
-            </p>
-          </div>
-
-          <!-- Pie -->
-          <div style="background-color: #f0f0f0; text-align: center; padding: 15px; font-size: 12px; color: #999;">
-            © ${new Date().getFullYear()} EDUKA. Todos los derechos reservados.
-          </div>
-
+   await sendEmail({
+  to: email,
+  subject: "Verificación de correo electrónico - UNICAL",
+  html: `
+  <div style="font-family: Arial, sans-serif; background-color: #f4f6f8; padding: 20px; color: #333;">
+    
+    <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 18px rgba(0,0,0,0.08); overflow: hidden;">
+      
+      <!-- Header -->
+      <div style="
+        text-align: center;
+        background: linear-gradient(135deg, #1B2A5B, #2f3f8f);
+        padding: 40px 20px;
+      ">
+        
+        <div style="
+          display: inline-block;
+          background: radial-gradient(circle, #ffffff 60%, #eef1ff 100%);
+          padding: 18px 28px;
+          border-radius: 16px;
+          box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+        ">
+          <img src="https://res.cloudinary.com/desgmhmg4/image/upload/v1775011838/unical-sf_ngqle3.png"
+               alt="UNICAL"
+               style="
+                 width: 240px;
+                 max-width: 100%;
+                 display: block;
+                 filter: drop-shadow(0px 6px 12px rgba(0,0,0,0.25));
+               " />
         </div>
+
       </div>
-      `,
-    });
+
+      <!-- Body -->
+      <div style="padding: 35px; text-align: center;">
+        
+        <h1 style="color: #1B2A5B; margin-bottom: 10px;">
+          Hola ${firstName} ${lastName},
+        </h1>
+
+        <h2 style="font-weight: normal; margin-bottom: 15px; color:#444;">
+          Bienvenido a UNICAL
+        </h2>
+
+        <!-- Línea decorativa -->
+        <div style="
+          width: 60px;
+          height: 4px;
+          background: #A4C639;
+          margin: 15px auto 25px;
+          border-radius: 2px;
+        "></div>
+
+        <p style="font-size: 16px; line-height: 1.6; margin-bottom: 25px;">
+          Gracias por registrarte en <strong>UNICAL - Universidad Integral del Caribe y América Latina</strong>.
+        </p>
+
+        <p style="font-size: 16px; line-height: 1.6; margin-bottom: 25px;">
+          Para completar la activación de tu cuenta, por favor verifica tu correo electrónico haciendo clic en el siguiente botón:
+        </p>
+
+        <!-- Botón -->
+        <p style="text-align: center; margin-bottom: 35px;">
+          <a href="${link}" target="_blank"
+            style="
+              background: linear-gradient(135deg, #A4C639, #8fb82f);
+              color: #1B2A5B;
+              padding: 14px 32px;
+              text-decoration: none;
+              border-radius: 8px;
+              font-size: 16px;
+              font-weight: 700;
+              display: inline-block;
+              box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+            ">
+            ✔ Verificar cuenta
+          </a>
+        </p>
+
+        <p style="margin-top: 20px; font-size: 14px; color: #666;">
+          Si no realizaste este registro, puedes ignorar este mensaje sin inconvenientes.
+        </p>
+
+      </div>
+
+      <!-- Footer -->
+      <div style="background-color: #f0f0f0; text-align: center; padding: 20px; font-size: 13px; color: #666;">
+        <p>Este es un correo automático, por favor no respondas a este mensaje.</p>
+        <p style="margin-top: 15px;">
+          © ${new Date().getFullYear()} UNICAL - Universidad Integral del Caribe y América Latina
+        </p>
+      </div>
+
+    </div>
+    
+  </div>
+  `,
+});
 
     return res
       .status(200)
@@ -411,45 +471,96 @@ const create = catchError(async (req, res) => {
 
   await EmailCode.create({ code, userId: newUser.id });
 
-  await sendEmail({
-    to: email,
-    subject: "Verificación de correo electrónico - EDUKA",
-    html: `
-    <div style="font-family: Arial, sans-serif; background-color: #f0f8ff; padding: 20px; color: #333;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); overflow: hidden;">
+await sendEmail({
+  to: email,
+  subject: "Verificación de correo electrónico - UNICAL",
+  html: `
+    <div style="font-family: Arial, sans-serif; background-color: #f4f6f8; padding: 20px; color: #333;">
+      
+      <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08); overflow: hidden;">
         
-        <!-- Encabezado con logo -->
-        <div style="text-align: center; background-color: #007BFF; padding: 20px;">
-          <img src="https://res.cloudinary.com/desgmhmg4/image/upload/v1747890355/eduka_sf_gaus5o.png" alt="EDUKA" style="width: 150px;" />
+        <!-- Header -->
+        <div style="
+          text-align: center;
+          background: linear-gradient(135deg, #1B2A5B, #2f3f8f);
+          padding: 40px 20px;
+        ">
+          
+          <div style="
+            display: inline-block;
+            background: radial-gradient(circle, #ffffff 60%, #eef1ff 100%);
+            padding: 18px 28px;
+            border-radius: 16px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+          ">
+            <img src="https://res.cloudinary.com/desgmhmg4/image/upload/v1775011838/unical-sf_ngqle3.png"
+                 alt="UNICAL"
+                 style="
+                   width: 220px;
+                   max-width: 100%;
+                   display: block;
+                   filter: drop-shadow(0px 6px 12px rgba(0,0,0,0.25));
+                 " />
+          </div>
+
         </div>
 
-        <!-- Cuerpo del mensaje -->
+        <!-- Body -->
         <div style="padding: 30px; text-align: center;">
-          <h1 style="color: #007BFF;">Hola ${firstName} ${lastName},</h1>
-          <h2 style="font-weight: normal;">Gracias por registrarte en <strong>EDUKA</strong></h2>
+          
+          <h1 style="color: #1B2A5B;">
+            Hola ${firstName} ${lastName},
+          </h1>
+
+          <h2 style="font-weight: normal; color:#444;">
+            Gracias por registrarte en <strong>UNICAL</strong>
+          </h2>
+
+          <!-- Línea decorativa -->
+          <div style="
+            width: 60px;
+            height: 4px;
+            background: #A4C639;
+            margin: 15px auto 25px;
+            border-radius: 2px;
+          "></div>
+
           <p style="font-size: 16px; line-height: 1.6;">
             Para completar tu registro y activar tu cuenta, por favor haz clic en el siguiente botón para verificar tu correo electrónico:
           </p>
 
-          <!-- Botón de verificación -->
-          <a href="${link}" style="display: inline-block; padding: 12px 24px; background-color: #00aaff; color: white; font-size: 16px; font-weight: bold; border-radius: 8px; text-decoration: none; margin-top: 20px;">
-            Verificar cuenta
+          <!-- Botón -->
+          <a href="${link}" target="_blank"
+            style="
+              display: inline-block;
+              margin-top: 20px;
+              padding: 14px 30px;
+              background: linear-gradient(135deg, #A4C639, #8fb82f);
+              color: #1B2A5B;
+              font-size: 16px;
+              font-weight: 700;
+              border-radius: 8px;
+              text-decoration: none;
+              box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+            ">
+            ✔ Verificar cuenta
           </a>
 
           <p style="margin-top: 30px; font-size: 14px; color: #666;">
             Si tú no solicitaste este registro, puedes ignorar este mensaje.
           </p>
+
         </div>
 
-        <!-- Pie -->
+        <!-- Footer -->
         <div style="background-color: #f0f0f0; text-align: center; padding: 15px; font-size: 12px; color: #999;">
-          © ${new Date().getFullYear()} EDUKA. Todos los derechos reservados.
+          © ${new Date().getFullYear()} UNICAL - Universidad Integral del Caribe y América Latina
         </div>
 
       </div>
     </div>
-    `,
-  });
+  `,
+});
 
   return res
     .status(201)
@@ -945,30 +1056,79 @@ const sendEmailResetPassword = catchError(async (req, res) => {
     code: code,
     userId: user.id,
   });
-  await sendEmail({
-    to: email,
-    subject: "Restablecer tu contraseña - EDUKA",
-    html: `
-  <div style="font-family: Arial, sans-serif; background-color: #f0f8ff; padding: 20px; color: #333;">
-    <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); overflow: hidden;">
+await sendEmail({
+  to: email,
+  subject: "Restablecer tu contraseña - UNICAL",
+  html: `
+  <div style="font-family: Arial, sans-serif; background-color: #f4f6f8; padding: 20px; color: #333;">
+    
+    <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08); overflow: hidden;">
 
-      <!-- Encabezado con logo -->
-      <div style="text-align: center; background-color: #007BFF; padding: 20px;">
-        <img src="https://res.cloudinary.com/desgmhmg4/image/upload/v1747890355/eduka_sf_gaus5o.png" alt="EDUKA" style="width: 150px;" />
+      <!-- Header -->
+      <div style="
+        text-align: center;
+        background: linear-gradient(135deg, #1B2A5B, #2f3f8f);
+        padding: 40px 20px;
+      ">
+        
+        <div style="
+          display: inline-block;
+          background: radial-gradient(circle, #ffffff 60%, #eef1ff 100%);
+          padding: 18px 28px;
+          border-radius: 16px;
+          box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+        ">
+          <img src="https://res.cloudinary.com/desgmhmg4/image/upload/v1775011838/unical-sf_ngqle3.png"
+               alt="UNICAL"
+               style="
+                 width: 220px;
+                 max-width: 100%;
+                 display: block;
+                 filter: drop-shadow(0px 6px 12px rgba(0,0,0,0.25));
+               " />
+        </div>
+
       </div>
 
-      <!-- Cuerpo del mensaje -->
+      <!-- Body -->
       <div style="padding: 30px; text-align: center;">
-        <h1 style="color: #007BFF;">Hola, ${user.firstName} ${user.lastName
-      }</h1>
-        <h2 style="font-weight: normal;">¿Olvidaste tu contraseña?</h2>
+        
+        <h1 style="color: #1B2A5B;">
+          Hola, ${user.firstName} ${user.lastName}
+        </h1>
+
+        <h2 style="font-weight: normal; color:#444;">
+          ¿Olvidaste tu contraseña?
+        </h2>
+
+        <!-- Línea decorativa -->
+        <div style="
+          width: 60px;
+          height: 4px;
+          background: #A4C639;
+          margin: 15px auto 25px;
+          border-radius: 2px;
+        "></div>
+
         <p style="font-size: 16px; line-height: 1.6;">
           No te preocupes. Para restablecer tu contraseña, simplemente haz clic en el siguiente botón:
         </p>
 
-        <!-- Botón de restablecimiento -->
-        <a href="${link}" style="display: inline-block; padding: 12px 24px; background-color: #00aaff; color: white; font-size: 16px; font-weight: bold; border-radius: 8px; text-decoration: none; margin-top: 20px;">
-          Restablecer contraseña
+        <!-- Botón -->
+        <a href="${link}" target="_blank"
+          style="
+            display: inline-block;
+            margin-top: 20px;
+            padding: 14px 30px;
+            background: linear-gradient(135deg, #A4C639, #8fb82f);
+            color: #1B2A5B;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 8px;
+            text-decoration: none;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+          ">
+          🔑 Restablecer contraseña
         </a>
 
         <p style="margin-top: 30px; font-size: 14px; color: #666;">
@@ -976,15 +1136,15 @@ const sendEmailResetPassword = catchError(async (req, res) => {
         </p>
       </div>
 
-      <!-- Pie -->
+      <!-- Footer -->
       <div style="background-color: #f0f0f0; text-align: center; padding: 15px; font-size: 12px; color: #999;">
-        © ${new Date().getFullYear()} EDUKA. Todos los derechos reservados.
+        © ${new Date().getFullYear()} UNICAL - Universidad Integral del Caribe y América Latina
       </div>
 
     </div>
   </div>
   `,
-  });
+});
 
   return res.json(user);
 });

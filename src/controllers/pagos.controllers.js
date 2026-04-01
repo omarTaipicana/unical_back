@@ -358,63 +358,141 @@ const create = catchError(async (req, res) => {
     distintivo === 1 ||
     distintivo === "1";
 
-  await sendEmail({
-    to: user.email,
-    subject: "✅ Pago registrado - EDUKA",
-    html: `
-  <div style="font-family: Arial, sans-serif; background-color: #f0f8ff; padding: 20px; color: #333;">
-    <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); overflow: hidden;">
+await sendEmail({
+  to: user.email,
+  subject: "✅ Pago registrado - UNICAL",
+  html: `
+  <div style="font-family: Arial, sans-serif; background-color: #f4f6f8; padding: 20px; color: #333;">
+    
+     <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 18px rgba(0,0,0,0.08); overflow: hidden;">
       
-      <!-- Encabezado con logo -->
-      <div style="text-align: center; background-color: #1B326B; padding: 20px;">
-        <img src="https://res.cloudinary.com/desgmhmg4/image/upload/v1765358711/eduka_2026_kh3h9e.png" alt="EDUKA" style="width: 150px;" />
+      <!-- Header -->
+      <div style="
+        text-align: center;
+        background: radial-gradient(circle at center, #ffffff 0%, #e8ecff 30%, #2f3f8f 70%, #1B2A5B 100%);
+        padding: 50px 20px;
+      ">
+        
+        <img src="https://res.cloudinary.com/desgmhmg4/image/upload/v1775011838/unical-sf_ngqle3.png"
+             alt="UNICAL"
+             style="
+               width: 240px;
+               max-width: 100%;
+               display: block;
+               margin: 0 auto;
+               filter: drop-shadow(0px 6px 12px rgba(0,0,0,0.25));
+             " />
+
       </div>
 
-      <!-- Cuerpo del mensaje -->
-      <div style="padding: 30px; text-align: center;">
-        <h2 style="color: #1B326B;">¡Hola ${user.firstName} ${user.lastName
-      }!</h2>
-        <p style="font-size: 16px; line-height: 1.6;">
-          Hemos recibido tu comprobante de pago por el curso <strong>"${cursoData.nombre
-      }"</strong>.
-        </p>
-        <p style="font-size: 16px; line-height: 1.6;">
-          <strong>Valor depositado:</strong> $${valorDepositado}
-        </p>
-        ${incluyeMoneda || incluyeDistintivo
-        ? `<p style="font-size: 16px; line-height: 1.6;">Incluye: ${[
-          incluyeMoneda ? "🪙 Moneda conmemorativa" : "",
-          incluyeDistintivo ? "🎖️ Distintivo" : "",
-        ]
-          .filter(Boolean)
-          .join(" y ")}</p>`
-        : ""
-      }
-        <p style="font-size: 16px; line-height: 1.6;">
-          Una vez validado el pago, se emitirá tu certificado. En caso de haber solicitado reconocimientos físicos, recibirás otro correo cuando estén disponibles para su retiro.
+      <!-- Body -->
+      <div style="padding: 35px; text-align: center;">
+        
+        <h1 style="color: #1B2A5B; margin-bottom: 10px;">
+          ¡Hola ${user.firstName} ${user.lastName}!
+        </h1>
+
+        <h2 style="font-weight: normal; margin-bottom: 15px; color:#444;">
+          ✅ Hemos recibido tu registro de pago
+        </h2>
+
+        <div style="
+          width: 60px;
+          height: 4px;
+          background: #A4C639;
+          margin: 15px auto 25px;
+          border-radius: 2px;
+        "></div>
+
+        <h2 style="color: #A4C639; margin-bottom: 25px;">
+          "${cursoData.nombre}"
+        </h2>
+
+        <p style="font-size: 16px; line-height: 1.6; margin-bottom: 18px;">
+          Hemos recibido correctamente tu comprobante de pago correspondiente al curso 
+          <strong>"${cursoData.nombre}"</strong>.
         </p>
 
-        <!-- Botón para ver comprobante -->
-        <div style="margin-top: 30px;">
-          <a href="${url}" target="_blank" style="background-color: #1B326B; color: white; padding: 12px 20px; border-radius: 5px; text-decoration: none;">
-            Ver comprobante de pago
+        <p style="font-size: 16px; line-height: 1.6; margin-bottom: 18px;">
+          <strong>Valor depositado:</strong> $${valorDepositado}
+        </p>
+
+        ${incluyeMoneda || incluyeDistintivo
+          ? `<p style="font-size: 16px; line-height: 1.6; margin-bottom: 18px;">
+              <strong>Incluye:</strong> ${[
+                incluyeMoneda ? "🪙 Moneda conmemorativa" : "",
+                incluyeDistintivo ? "🎖️ Distintivo" : "",
+              ]
+                .filter(Boolean)
+                .join(" y ")}
+            </p>`
+          : ""
+        }
+
+        <p style="font-size: 16px; line-height: 1.6; margin-bottom: 25px;">
+          Nuestro equipo realizará la validación de tu pago en el menor tiempo posible. 
+          Una vez confirmado, continuaremos con el proceso correspondiente de tu inscripción y certificación académica.
+        </p>
+
+        <p style="font-size: 16px; line-height: 1.6; margin-bottom: 30px;">
+          En caso de haber solicitado reconocimientos físicos, recibirás una notificación adicional cuando estén disponibles para su entrega o retiro.
+        </p>
+
+        <!-- Botón -->
+        <p style="text-align: center; margin-bottom: 35px;">
+          <a href="${url}" target="_blank"
+            style="
+              background: linear-gradient(135deg, #A4C639, #8fb82f);
+              color: #1B2A5B;
+              padding: 14px 32px;
+              text-decoration: none;
+              border-radius: 8px;
+              font-size: 16px;
+              font-weight: 700;
+              display: inline-block;
+              box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+            ">
+            📄 Ver comprobante de pago
+          </a>
+        </p>
+
+        <!-- Atención -->
+        <div style="margin-top: 40px; text-align: center;">
+          <p style="font-size: 20px; font-weight: 700; color: #1B2A5B; margin-bottom: 10px;">
+            📞 Atención Personalizada
+          </p>
+          <p style="font-size: 16px; line-height: 1.6; margin-bottom: 20px;">
+            Si no realizaste este registro o necesitas asistencia, nuestro equipo está disponible para ayudarte.
+          </p>
+          <a href="https://wa.me/593980773229" target="_blank"
+            style="
+              background-color: #25D366;
+              color: #ffffff;
+              padding: 12px 28px;
+              text-decoration: none;
+              border-radius: 6px;
+              font-size: 16px;
+              font-weight: 600;
+              display: inline-block;
+            ">
+            Escribir por WhatsApp
           </a>
         </div>
 
-        <p style="margin-top: 30px; font-size: 14px; color: #666;">
-          Si no realizaste este registro de pago, por favor comunícate con nosotros.
-        </p>
       </div>
 
-      <!-- Pie -->
-      <div style="background-color: #f0f0f0; text-align: center; padding: 15px; font-size: 12px; color: #999;">
-        © ${new Date().getFullYear()} EDUKA. Todos los derechos reservados.
+      <!-- Footer -->
+      <div style="background-color: #f0f0f0; text-align: center; padding: 20px; font-size: 13px; color: #666;">
+        <p>Este es un correo automático, por favor no respondas a este mensaje.</p>
+        <p style="margin-top: 15px;">
+          © ${new Date().getFullYear()} UNICAL - Universidad Integral del Caribe y América Latina
+        </p>
       </div>
 
     </div>
   </div>
   `,
-  });
+});
 
   const io = req.app.get("io");
   if (io) io.emit("pagoCreado", result);
