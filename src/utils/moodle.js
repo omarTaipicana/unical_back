@@ -41,7 +41,7 @@ async function crearUsuarioMoodle({ cedula, nombres, apellidos, email }) {
         wsfunction: "core_user_create_users",
         moodlewsrestformat: "json",
         "users[0][username]": cedula,
-        "users[0][password]": `Eduka.${cedula}*`,
+        "users[0][password]": `Unical.${cedula}*`,
         "users[0][firstname]": nombres,
         "users[0][lastname]": apellidos,
         "users[0][email]": email,
